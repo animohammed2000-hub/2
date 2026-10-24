@@ -61,9 +61,10 @@
 `MESSAGE_TOO_LONG` و`GEMINI_TIMEOUT` و`GEMINI_RATE_LIMITED` و
 `GEMINI_MODEL_NOT_FOUND` و`EMPTY_MODEL_RESPONSE`.
 
-المسار القديم `/functions/v1/ai-assistant` محمي أيضًا ويستخدم عقد الرد نفسه
-للتوافق أثناء الانتقال. يقبل core أيضًا شكل الطلب القديم `{ message, history }`.
-أي عميل قديم يقرأ `reply` بدل `text` يحتاج إلى تحديث قبل نشر هذا المسار.
+المسار القديم `/functions/v1/ai-assistant` محمي أيضًا، لكنه يحتفظ برد النجاح
+القديم `{ "reply": "..." }` لتقليل كسر العملاء السابقين. كلا المسارين يقبل
+شكل الطلب القديم `{ message, history }`. الواجهة النشطة تستعمل
+`gemini-chat` فقط.
 
 ## المهلات والسجلات
 

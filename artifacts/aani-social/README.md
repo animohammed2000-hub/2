@@ -47,8 +47,8 @@
 - `supabase/functions/_shared/gemini.ts` — التحقق، حدود الطلب، المهلات،
   السجلات الآمنة، واستدعاء Gemini.
 - `supabase/functions/gemini-chat/index.ts` — المسار الصحيح للدالة النشطة.
-- `supabase/functions/ai-assistant/index.ts` — مسار قديم محمي يستخدم عقد الرد
-  الموحد؛ يجب تحديث أي عميل خارجي ما زال يقرأ `reply` بدل `text`.
+- `supabase/functions/ai-assistant/index.ts` — مسار قديم محمي يحافظ على
+  ردّ `{ reply }` لعملائه السابقين؛ الدالة النشطة للواجهة هي `gemini-chat`.
 - `supabase/config.toml` — يثبت `verify_jwt = true` للدالتين.
 - `docs/assistant-api-contract.md` — عقد الواجهة والخلفية.
 - `docs/SETUP_AR.md` — إعدادات Replit وSupabase وخطوات النشر والتراجع.

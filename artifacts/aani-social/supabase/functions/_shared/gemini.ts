@@ -3,6 +3,8 @@ type ChatMessage = {
   content: string;
 };
 
+type ResponseMode = "text" | "reply";
+
 type ValidatedMessages =
   | { ok: true; messages: ChatMessage[] }
   | { ok: false; status: number; code: string; message: string };
@@ -414,6 +416,7 @@ function publicErrorForGeminiStatus(status: number): {
 
 export async function handleGeminiRequest(
   req: Request,
+  responseMode: ResponseMode = "text",
 ): Promise<Response> {
   const requestId = getRequestId(req);
   const startedAt = Date.now();
@@ -708,10 +711,12 @@ export async function handleGeminiRequest(
   });
 
   const finishReason = candidate?.finishReason ?? "UNKNOWN";
+  const responseData = responseMode === "reply"
+    ? { reply: text, model, finishReason }
+    : { text, model, finishReason };
+
   return json(req, requestId, {
-    text,
-    model,
-    finishReason,
+    ...responseData,
     requestId,
   });
 }

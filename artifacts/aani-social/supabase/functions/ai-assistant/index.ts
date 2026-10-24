@@ -1,4 +1,4 @@
 import { handleGeminiRequest } from "../_shared/gemini.ts";
 
-// Deprecated route alias; it uses the same authentication and response contract.
-Deno.serve((req: Request) => handleGeminiRequest(req));
+// Legacy route: keep its { reply } response while requiring a valid user session.
+Deno.serve((req: Request) => handleGeminiRequest(req, "reply"));
